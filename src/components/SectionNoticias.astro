@@ -1,30 +1,53 @@
----
-const noticia = fetch("https://noti-unah.herokuapp.com/");
----
-
 <section class="content">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Titulo</th>
-                <th scope="col">Fecha</th>
-            </tr>
-        </thead>
-        <tbody id="noticias"> </tbody>
-    </table>
+  <table class="table" id="noticias">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Titulo</th>
+        <th scope="col">Fecha</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 </section>
 
-<script define:vars={{ noticia }}>
-   fetch("https://noti-unah.herokuapp.com/").then((response) => response.json())
+<script is:inline>
+  fetch("https://noti-unah.herokuapp.com/", {
+    method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      Accept: "application/json",
+      "Content-Type": "Application/json",
+    },
+  })
+    .then((res) => res.json())
     .then((data) => {
-        data.length
-        console.log(data.length);
-        // let cuerpoTabla = document.getElementById("equipos-tabla");
-        // let tablaLlena = "";
-        // for (var i = 0; i < data.length; i++) {
-        //     tablaLlena +="<tr><td>" + data[i].titulo;
-        // }
-        // // cuerpoTabla.innerHTML = tablaLlena;
-    })
+        console.log(data);
+      let tabla = document.getElementById("noticias").querySelector("tbody");
+      if (data.length !== 0) {
+        for (let i = 0; i < data.length; i++) {
+          let fila = `<tr>
+                                    <td>${data[i].id}</td>
+                                    <td>${data[i].title}</td>
+                                    <td>${data[i].fecha}</td>
+
+                                </tr>`;
+          let btn = document.createElement("tr");
+          btn.innerHTML = fila;
+          if (i == 0) {
+            tabla.innerHTML = fila;
+          } else {
+            tabla.appendChild(btn);
+          }
+        }
+      } else {
+        tabla.innerHTML = `
+                                        <td colspan="7">
+                                            <div class="alert alert-danger text-center" role="alert">
+                                                <h3 class="text-white">NO HAY DATOS</h3>
+                                            </div>
+                                        </td>
+                    `;
+      }
+    });
 </script>
