@@ -1,0 +1,30 @@
+---
+const noticia = fetch("https://noti-unah.herokuapp.com/");
+---
+
+<section class="content">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Fecha</th>
+            </tr>
+        </thead>
+        <tbody id="noticias"> </tbody>
+    </table>
+</section>
+
+<script define:vars={{ noticia }}>
+   fetch("https://noti-unah.herokuapp.com/").then((response) => response.json())
+    .then((data) => {
+        data.length
+        console.log(data.length);
+        // let cuerpoTabla = document.getElementById("equipos-tabla");
+        // let tablaLlena = "";
+        // for (var i = 0; i < data.length; i++) {
+        //     tablaLlena +="<tr><td>" + data[i].titulo;
+        // }
+        // // cuerpoTabla.innerHTML = tablaLlena;
+    })
+</script>
