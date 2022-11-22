@@ -1,0 +1,79 @@
+---
+import Modal from "./Modal.astro";
+---
+
+<section class="content">
+  <Modal />
+  <table class="table" id="noticias">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Titulo</th>
+        <th scope="col">Fecha</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<script is:inline>
+  function cerrar() {
+    $("#editNoticiaModal").modal("hide");
+  }
+  fetch("http://127.0.0.1:8000/", {
+    method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      Accept: "application/json",
+      "Content-Type": "Application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      let tabla = document.getElementById("noticias").querySelector("tbody");
+      if (data.length !== 0) {
+        for (let i = 0; i < data.length; i++) {
+          let fila = `<tr>
+                            <td><a href="javascript:editNoticia(${data[i].id})">${data[i].id}</a></td>
+                            <td><a href="javascript:editNoticia(${data[i].id})">${data[i].title}</a></td>
+                            <td>${data[i].fecha}</td>
+                        </tr>`;
+          let btn = document.createElement("tr");
+          btn.innerHTML = fila;
+          if (i == 0) {
+            tabla.innerHTML = fila;
+          } else {
+            tabla.appendChild(btn);
+          }
+        }
+      } else {
+        tabla.innerHTML = `
+                          <td colspan="3">
+                              <div class="alert alert-danger text-center" role="alert">
+                                  <h3 class="text-white">NO HAY DATOS</h3>
+                              </div>
+                          </td>
+                      `;
+      }
+    });
+  let editNoticia = (id) => {
+    fetch("http://127.0.0.1:8000/"+id, {
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        Accept: "application/json",
+        "Content-Type": "Application/json",
+      },
+    })
+    .then((res) => res.json())
+    .then(data => {
+        console.log(data.fecha);
+        document.getElementById("titulo").value = data.title;
+        document.getElementById("descripcion").value = data.descr;
+        document.getElementById("noticia").value = data.cuerpo;
+        document.getElementById("img").value = data.img;
+        document.getElementById("fecha").value = data.fecha;
+    })
+    $("#editNoticiaModal").modal("show");
+  };
+</script>

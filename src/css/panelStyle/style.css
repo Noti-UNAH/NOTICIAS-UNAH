@@ -76,3 +76,8 @@ body {
     background: #DC3545;
   }
   
+  textarea {
+    overflow-y: scroll;
+    height: 100px;
+    resize: none; /* Remove this if you want the user to resize the textarea */
+}
