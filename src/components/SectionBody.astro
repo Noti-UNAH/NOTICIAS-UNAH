@@ -1,5 +1,5 @@
 ---
-const response = await fetch("https://noti-unah.herokuapp.com/");
+const response = await fetch("http://127.0.0.1:8000/");
 const data = await response.json();
 ---
 
@@ -69,11 +69,11 @@ const data = await response.json();
         <div class="widget widget-categories">
           <h4 class="widget-title"><span>Categorias</span></h4>
           <ul class="list-unstyled widget-list">
-            <li>
+            <!-- <li>
               <a href="/Fechas" class="d-flex"
                 >Fechas Academicas <small class="ml-auto"></small>
               </a>
-            </li>
+            </li> -->
             <li>
               <a href="/Academico" class="d-flex"
                 >Academico <small class="ml-auto"></small>

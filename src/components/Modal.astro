@@ -7,7 +7,7 @@
                 <h2>Detalles de la noticia</h2>
                 <button type="button" class="close" onclick="cerrar()">&times;</button>
             </div>
-            <form role="form" id="editUsersForm">
+            <form role="form" id="editNoticiasForm">
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="row">
@@ -23,7 +23,7 @@
                                           <input
                                             type="text"
                                             class="form-control"
-                                            id="titulo"
+                                            id="editTitulo"
                                             placeholder="Titulo"
                                             required
                                           />
@@ -32,7 +32,7 @@
                                           <label for="descripcion">Descripcion</label>
                                           <textarea
                                             class="form-control"
-                                            id="descripcion"
+                                            id="editDescripcion"
                                             rows="4"
                                             placeholder="Descripcion"></textarea>
                                         </div>
@@ -41,7 +41,7 @@
                                         <label for="noticia">Noticia</label>
                                         <textarea
                                           class="form-control"
-                                          id="noticia"
+                                          id="editNoticia"
                                           rows="20"
                                           placeholder="Noticia"
                                           required
@@ -50,11 +50,11 @@
                                       <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="img">Agregue imagen</label>
-                                            <input type="text" class="form-control" id="img" placeholder="url img" required>
+                                            <input type="text" class="form-control" id="editImg" placeholder="url img" required>
                                         </div>
                                         <div class="form-group col-md-4">
                                           <label for="fecha">Fecha</label>
-                                          <input type="date" class="form-control" id="fecha" required/>
+                                          <input type="date" class="form-control" id="editFecha" required/>
                                         </div>
                                       </div>
                                 </div>
